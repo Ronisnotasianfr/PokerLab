@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+*.egg
+.eggs/
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# Test / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Node (leftover from scaffold)
+node_modules/
+
+# Env files
+.env.local
+.env
+.env.*
+
+# OS
+.DS_Store
+Thumbs.db
