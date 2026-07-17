@@ -1,11 +1,3 @@
-"""
-test_evaluator.py — Verify that treys hand ranking is working correctly.
-
-Known hand rankings (lower rank = stronger):
-  Royal Flush > Straight Flush > Four of a Kind > Full House >
-  Flush > Straight > Three of a Kind > Two Pair > One Pair > High Card
-"""
-
 import unittest
 from poker_bot.cards import to_treys_list
 from poker_bot.evaluator import rank_hand, class_string
@@ -14,20 +6,15 @@ from poker_bot.evaluator import rank_hand, class_string
 class TestEvaluator(unittest.TestCase):
 
     def test_royal_flush_beats_quads(self):
-        # Royal flush: A K Q J T spades
         hole_rf = to_treys_list(["As", "Ks"])
         board_rf = to_treys_list(["Qs", "Js", "Ts", "2d", "3c"])
         rank_rf = rank_hand(hole_rf, board_rf)
 
-        # Four aces
-        hole_q = to_treys_list(["Ac", "Ad"])
-        board_q = to_treys_list(["Ah", "Ah", "2d", "3c", "4h"])
-        # Use a valid four-of-a-kind setup
         hole_q = to_treys_list(["Ac", "Ad"])
         board_q = to_treys_list(["2d", "2h", "2s", "2c", "3h"])
         rank_q = rank_hand(hole_q, board_q)
 
-        self.assertLess(rank_rf, rank_q, "Royal flush should beat four of a kind")
+        self.assertLess(rank_rf, rank_q)
 
     def test_full_house_beats_flush(self):
         hole_fh = to_treys_list(["As", "Ah"])
@@ -38,7 +25,7 @@ class TestEvaluator(unittest.TestCase):
         board_fl = to_treys_list(["6h", "8h", "Th", "3d", "5s"])
         rank_fl = rank_hand(hole_fl, board_fl)
 
-        self.assertLess(rank_fh, rank_fl, "Full house should beat flush")
+        self.assertLess(rank_fh, rank_fl)
 
     def test_pair_beats_high_card(self):
         hole_pair = to_treys_list(["As", "Ah"])
@@ -49,7 +36,7 @@ class TestEvaluator(unittest.TestCase):
         board_hc = to_treys_list(["7h", "9c", "Jd", "Ks", "3h"])
         rank_hc = rank_hand(hole_hc, board_hc)
 
-        self.assertLess(rank_pair, rank_hc, "Pair should beat high card")
+        self.assertLess(rank_pair, rank_hc)
 
     def test_class_string_returns_string(self):
         hole = to_treys_list(["As", "Ah"])
